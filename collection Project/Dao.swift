@@ -11,8 +11,8 @@ import UIKit
 
 class  model  {
     
-    var image : [UIImage] = [ UIImage.init(named: "1")! ,UIImage.init(named: "2")! , UIImage.init(named: "3")! , UIImage.init(named: "4")! ]
-    var  description : [String] = ["pehli photo collection view ki"," Doosri photo collection view ki","teesri photo collection view ki"," chowthi photo collection view ki"]
+    var image : [UIImage] = [ UIImage.init(named: "1")! ,UIImage.init(named: "2")! , UIImage.init(named: "3")! , UIImage.init(named: "4")!, UIImage.init(named: "1")! ,UIImage.init(named: "2")! , UIImage.init(named: "3")! , UIImage.init(named: "4")!]
+    var  description : [String] = ["pehli photo collection view ki"," Doosri photo collection view ki","teesri photo collection view ki"," chowthi photo collection view ki" , "pehli photo collection view ki"," Doosri photo collection view ki","teesri photo collection view ki"," chowthi photo collection view ki"]
      
 }
 

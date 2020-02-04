@@ -9,32 +9,43 @@
 import UIKit
 
 
-
-class ViewController: UIViewController ,UICollectionViewDelegate , UICollectionViewDataSource , PassData , UIImagePickerControllerDelegate , UINavigationControllerDelegate {
+class ViewController: UIViewController ,UICollectionViewDelegate , UICollectionViewDataSource , PassData , UIImagePickerControllerDelegate , UINavigationControllerDelegate  {
    
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet var popView: UIView!
     @IBOutlet weak var textLabel: UILabel!
     
+    @IBOutlet var descriptionView: UIView!
+    @IBOutlet weak var descriptionLabel: UILabel!
     
+    @IBAction func closePressed(_ sender: UIButton) {
+        descriptionView.removeFromSuperview()
+    }
     
+   
     override func viewDidLoad(){
     super.viewDidLoad()
-        let itemSize = UIScreen.main.bounds.width / 2
         
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 10, right: 0)
-        layout.itemSize = CGSize(width: itemSize, height: itemSize)
-       
-        
+    let itemSize = UIScreen.main.bounds.width / 3 - 3
+     //   let  w = collectionView.frame.width - 20
+      let layout = UICollectionViewFlowLayout()
+     //   layout.scrollDirection = .vertical
+     //  layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 10, right: 0)
+
+        layout.estimatedItemSize = CGSize(width: itemSize , height: 200)
+
+      layout.minimumInteritemSpacing = 3
+       layout.minimumLineSpacing = 3
+
+
         collectionView.collectionViewLayout = layout
     let nib = UINib(nibName: "CustomCell", bundle: nil)
     collectionView.register(nib, forCellWithReuseIdentifier: "cell")
         
         
     }
+ 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return UtilClass.sharedInstance.md.image.count
@@ -43,12 +54,16 @@ class ViewController: UIViewController ,UICollectionViewDelegate , UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomCell
         cell.delegate = self
+      //  cell.imageViewer.contentMode = UIView.ContentMode.scaleAspectFit
         cell.imageViewer.image = UtilClass.sharedInstance.md.image[indexPath.row]
         return cell
     }
     
      func passBack(data: String) {
-           textLabel.text = data
+        descriptionLabel.text = data
+        self.view.addSubview(descriptionView)
+        descriptionView.center = self.view.center
+       
        }
        
        func hide() {
@@ -58,8 +73,7 @@ class ViewController: UIViewController ,UICollectionViewDelegate , UICollectionV
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         self.view.addSubview(popView)
         popView.center = self.view.center
-        self.view.isOpaque = true
-    
+       
     }
     
     @IBAction func cameraPressed(_ sender: UIButton) {
@@ -90,4 +104,5 @@ class ViewController: UIViewController ,UICollectionViewDelegate , UICollectionV
         popView.removeFromSuperview()
     }
     
+  
 }
